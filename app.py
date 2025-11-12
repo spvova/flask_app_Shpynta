@@ -1,9 +1,14 @@
-from flask import Flask # З модуля flask import class Flask
-app = Flask (__name__)   # Створення екземпляра класу Flask для нашої веб-програми
+from flask import Flask, render_template
 
-@app.route('/')         # URL '/' для обробки обробником маршруту main()
-def main():
-    return 'Hello world!'
+app = Flask(__name__)
 
-if __name__ == '__main__':
-    app.run(debug=True) # Запуск вбудованого веб-сервера та запуску цієї веб-програми Flask
+@app.route("/")
+def resume():
+    return render_template("resume.html", title="Резюме")
+
+@app.route("/contacts")
+def contacts():
+    return render_template("contacts.html", title="Контакти")
+
+if __name__ == "__main__":
+    app.run(debug=True)
