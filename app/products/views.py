@@ -5,7 +5,7 @@ from . import products_bp
 products = {
     'apple': 35,
     'banana': 65,
-    'milk': 60,
+    'milk': 55,
     'bread': 25
 }
 
