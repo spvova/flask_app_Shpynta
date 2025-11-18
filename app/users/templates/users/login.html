@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Авторизація{% endblock %}
+
+{% block content %}
+<div class="col-md-6 mx-auto mt-4">
+
+    <h3 class="mb-4 text-center">Увійти до системи</h3>
+
+    <form method="post" class="p-4 border rounded shadow-sm bg-light">
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="loginUser" name="username" placeholder="Ім'я користувача" required>
+            <label for="loginUser">Ім'я користувача</label>
+        </div>
+
+        <div class="form-floating mb-4">
+            <input type="password" class="form-control" id="loginPass" name="password" placeholder="Пароль" required>
+            <label for="loginPass">Пароль</label>
+        </div>
+
+        <div class="d-grid">
+            <button class="btn btn-success btn-lg" type="submit">Продовжити</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

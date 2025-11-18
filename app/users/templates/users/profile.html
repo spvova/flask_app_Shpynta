@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Ваш профіль{% endblock %}
+
+{% block content %}
+<div class="p-4 rounded {{ 'text-light bg-dark' if color == 'dark' else 'text-dark bg-white' }}">
+
+    <header>
+        <h2 class="mb-3">Привіт, {{ username }}!</h2>
+    </header>
+
+    <section class="mb-4">
+        <span class="me-2 fw-bold">Тема інтерфейсу:</span>
+
+        <a class="btn btn-outline-secondary btn-sm"
+           href="{{ url_for('users.set_color', scheme='light') }}">
+            Увімкнути світлу
+        </a>
+
+        <a class="btn btn-outline-dark btn-sm"
+           href="{{ url_for('users.set_color', scheme='dark') }}">
+            Увімкнути темну
+        </a>
+    </section>
+
+    <hr>
+
+    <section class="mt-4">
+        <h5>Робота з cookies</h5>
+
+        <!-- Додавання кукі -->
+        <form action="{{ url_for('users.add_cookie') }}" method="post" class="row g-2 mt-2">
+            <div class="col-md-4">
+                <input class="form-control" name="key" type="text" placeholder="Назва cookie">
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" name="value" type="text" placeholder="Значення">
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-success w-100 btn-sm" type="submit">Зберегти</button>
+            </div>
+        </form>
+
+        <!-- Видалення кукі -->
+        <form action="{{ url_for('users.delete_cookie') }}" method="post" class="row g-2 mt-3">
+            <div class="col-md-8">
+                <input class="form-control" name="key" type="text" placeholder="Ключ для видалення (пусто = всі)">
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-danger w-100 btn-sm" type="submit">Видалити</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="mt-4">
+        <h5 class="mb-3">Список наявних cookies</h5>
+
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Назва</th>
+                    <th>Значення</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, val in cookies.items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ val }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
+{% endblock %}

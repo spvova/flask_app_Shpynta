@@ -1,13 +1,15 @@
-from flask import request, redirect, url_for, render_template, abort
-from . import app
-@app.route('/')
-def main():
+from flask import Blueprint, render_template
+
+views_bp = Blueprint('views', __name__)
+
+@views_bp.route('/')
+def index():
     return render_template('base.html')
 
-@app.route('/contacts')
+@views_bp.route('/contacts')
 def contacts():
     return render_template('contacts.html')
 
-@app.route('/resume')
+@views_bp.route('/resume')
 def resume():
     return render_template('resume.html')
