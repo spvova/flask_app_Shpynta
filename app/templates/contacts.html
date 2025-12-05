@@ -1,22 +1,47 @@
 {% extends "base.html" %}
 
+{% block title %}Контакти{% endblock %}
+
 {% block content %}
-<section id="contacts">
-    <h2>Контакти</h2>
-    <form action="#" method="post" class="needs-validation" novalidate>
-        <div class="mb-3">
-            <label for="name" class="form-label">Ім’я</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Ваше ім'я" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.com" required>
-        </div>
-        <div class="mb-3">
-            <label for="message" class="form-label">Повідомлення</label>
-            <textarea id="message" name="message" class="form-control" rows="5" placeholder="Ваше повідомлення" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Відправити</button>
-    </form>
+<section id="contacts" class="mt-4">
+  <h2>Контакти</h2>
+  <p>Буду радий вашим повідомленням!</p>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="{{ url_for('views.contacts') }}" class="mt-3">
+    <div class="mb-3">
+      <label class="form-label">Ваше ім’я</label>
+      <input type="text" name="name" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" name="email" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Телефон</label>
+      <input type="text" name="phone" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Тема</label>
+      <input type="text" name="subject" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Повідомлення</label>
+      <textarea name="message" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-primary">Надіслати</button>
+  </form>
 </section>
 {% endblock %}
