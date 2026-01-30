@@ -1,4 +1,5 @@
 from app import create_app
+from app.posts.models import Post
 
 app = create_app()
 

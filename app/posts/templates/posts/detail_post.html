@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <article class="post-detail">
+        <h1 class="post-title">{{ post.title }}</h1>
+        
+        <div class="post-meta-detail">
+            <span class="badge category-badge">{{ post.category }}</span>
+            {% if post.user %}
+                <span class="author-info">Автор: <strong>{{ post.user.username }}</strong></span>
+            {% endif %}
+            <span class="date-info">{{ post.posted.strftime('%d.%m.%Y %H:%M') if post.posted else 'No date' }}</span>
+        </div>
+
+        <div class="post-content mt-3">
+            <p>{{ post.content }}</p>
+        </div>
+
+        {% if post.tags %}
+        <div class="post-tags mt-4">
+            <h5>Tags:</h5>
+            <div class="tags-container">
+                {% for tag in post.tags %}
+                    <span class="tag-badge">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <hr class="my-4">
+        <div class="post-actions">
+            <a href="{{ url_for('posts.index') }}" class="btn btn-secondary">← Back to Posts</a>
+        </div>
+    </article>
+</div>
+
+<style>
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .post-detail {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 3rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        border: 1px solid #e0e6ed;
+        animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .post-title {
+        color: #2c3e50;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        border-bottom: 4px solid #007bff;
+        padding-bottom: 1rem;
+        font-size: 2.2rem;
+        line-height: 1.3;
+    }
+
+    .post-meta-detail {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        color: #666;
+        flex-wrap: wrap;
+    }
+
+    .category-badge {
+        background-color: #e7f3ff;
+        color: #0056b3;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+
+    .author-info {
+        padding: 6px 14px;
+        background-color: #fff3e0;
+        border-radius: 20px;
+        color: #e65100;
+    }
+
+    .date-info {
+        padding: 6px 14px;
+        background-color: #f0f0f0;
+        border-radius: 20px;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    .post-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #444;
+        background-color: rgba(255,255,255,0.6);
+        padding: 2rem;
+        border-left: 4px solid #007bff;
+        border-radius: 6px;
+        margin: 1.5rem 0;
+    }
+
+    .post-content p {
+        margin: 0;
+    }
+
+    .post-tags {
+        background-color: #fff3cd;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border-left: 4px solid #ffc107;
+    }
+
+    .post-tags h5 {
+        color: #856404;
+        margin: 0 0 1rem 0;
+        font-weight: 600;
+    }
+
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tag-badge {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .post-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 2rem;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        box-shadow: 0 6px 12px rgba(108, 117, 125, 0.4);
+        transform: translateY(-2px);
+        text-decoration: none;
+    }
+
+    hr {
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #007bff, transparent);
+        margin: 2rem 0;
+    }
+
+    .mt-4 {
+        margin-top: 2rem;
+    }
+
+    .mt-3 {
+        margin-top: 1.5rem;
+    }
+
+    .my-4 {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+</style>
+{% endblock %}
